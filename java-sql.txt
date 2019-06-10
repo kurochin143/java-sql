@@ -48,3 +48,12 @@ LEFT JOIN Customers c
 ON o.CustomerId = c.CustomerId
 GROUP BY c.City;
 
+DELETE FROM Customers
+WHERE CustomerId NOT IN (SELECT CustomerId FROM Orders);
+
+CREATE TABLE accounts (
+	id BIGSERIAL NOT NULL,
+	name character(255) UNIQUE,
+	budget real NOT NULL,
+	PRIMARY KEY (id)
+)
