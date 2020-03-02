@@ -1,0 +1,59 @@
+SELECT *
+FROM Customers
+WHERE City = 'London';
+
+SELECT *
+FROM Customers
+WHERE PostalCode = '1010';
+
+SELECT Phone
+FROM Suppliers
+WHERE SupplierId == 11;
+
+SELECT *
+FROM Orders
+ORDER BY OrderDate DESC;
+
+SELECT *
+FROM Suppliers
+WHERE length(SupplierName) > 20;
+
+SELECT *
+FROM Customers
+WHERE CustomerName LIKE '%market%';
+
+INSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, Country)
+VALUES('The Hobbit', 'Bilbo Baggins', '1 Hobbit-Hole', 'Bag End', '111', 'Middle Earth');
+
+UPDATE Customers
+SET PostalCode = 11122
+WHERE ContactName = 'Bilbo Baggins';
+
+SELECT COUNT(o.OrderId) as NumbersOfOrders, c.CustomerName
+FROM Orders o
+LEFT JOIN Customers c
+ON o.CustomerId = c.CustomerId
+GROUP BY o.CustomerId
+
+SELECT COUNT(o.OrderId) as NumbersOfOrders, c.CustomerName
+FROM Orders o
+LEFT JOIN Customers c
+ON o.CustomerId = c.CustomerId
+GROUP BY o.CustomerId
+ORDER BY NumbersOfOrders DESC;
+
+SELECT COUNT(o.OrderId) as NumbersOfOrders, c.City
+FROM Orders o
+LEFT JOIN Customers c
+ON o.CustomerId = c.CustomerId
+GROUP BY c.City;
+
+DELETE FROM Customers
+WHERE CustomerId NOT IN (SELECT CustomerId FROM Orders);
+
+CREATE TABLE accounts (
+	id BIGSERIAL NOT NULL,
+	name character(255) UNIQUE,
+	budget real NOT NULL,
+	PRIMARY KEY (id)
+)
